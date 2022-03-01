@@ -1,10 +1,10 @@
+from django.urls import path
 
 from .views import (
     upload_pdf,
     status_pdf,
     view_page,
 )
-
 
 
 urlpatterns = [

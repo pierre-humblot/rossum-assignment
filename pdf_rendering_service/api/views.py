@@ -1,4 +1,3 @@
-
 from django.core.files.storage import FileSystemStorage
 from django.core.exceptions import ValidationError
 from django.http import FileResponse
@@ -16,7 +15,6 @@ from .models import Document
 from .serializers import DocumentStatusSerializer
 from .serializers import DocumentIdSerializer
 from .tasks import process_pdf
-
 
 
 @api_view(["POST"])
@@ -46,7 +44,6 @@ def upload_pdf(request):
 	return Response(serializer.data, status = status.HTTP_201_CREATED)
 
 
-
 @api_view(["GET"])
 def status_pdf(request, document_id):
 
@@ -56,7 +53,6 @@ def status_pdf(request, document_id):
 		return Response(serializer.data)
 	except Document.DoesNotExist:
 		return Response(status=status.HTTP_404_NOT_FOUND)
-
 
 
 @api_view(["GET"])

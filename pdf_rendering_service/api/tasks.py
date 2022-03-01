@@ -1,4 +1,3 @@
-
 import dramatiq
 import PIL
 from pdf2image import convert_from_path
@@ -7,7 +6,6 @@ from pika.exceptions import ConnectionWrongStateError
 
 from django.conf import settings
 from .models import Document
-
 
 
 @dramatiq.actor
@@ -42,10 +40,4 @@ def process_pdf(document_id):
 		dramatiq.get_broker().connection.close()
 	except ConnectionWrongStateError:
 		pass
-
-
-
-
-
-
 

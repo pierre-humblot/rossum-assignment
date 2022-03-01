@@ -22,7 +22,6 @@ from api.models import Document
 client = Client()
 
 
-
 class DocumentTestCase(TestCase):
 
     def test_document_id(self):
@@ -33,7 +32,6 @@ class DocumentTestCase(TestCase):
         self.assertEqual(document.id, 1)
         self.assertEqual(document.status, Document.STATUS_PROCESSING)
         self.assertEqual(document.pdf_file, "")
-
 
 
 class RequestUploadTestCase(TestCase):
@@ -75,7 +73,6 @@ class RequestUploadTestCase(TestCase):
             self.assertEqual(response.status_code, 400)
 
 
-
 class RequestGettingTestCase(TestCase):
 
     def test_get_non_existing_document(self):
@@ -109,6 +106,5 @@ class RequestGettingTestCase(TestCase):
             self.assertEqual(response.data["status"], Document.STATUS_DONE) # fails because dramatiq not working concurrently to the testing environment
             self.assertIn("n_pages", response.data)
             self.assertEqual(response.data["n_pages"], 1)
-
 
 
