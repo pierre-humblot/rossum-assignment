@@ -1,14 +1,10 @@
 from django.core.files.storage import FileSystemStorage
-from django.core.exceptions import ValidationError
 from django.http import FileResponse
-from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from django.utils.datastructures import MultiValueDictKeyError
 from rest_framework.views import APIView
-from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from rest_framework.parsers import MultiPartParser
 from rest_framework import status
 
 from .models import Document

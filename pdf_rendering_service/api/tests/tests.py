@@ -14,7 +14,6 @@ import time
 
 from django.test import TestCase
 from django.test import Client
-from django.core.files.uploadedfile import SimpleUploadedFile
 from django.conf import settings
 
 from api.models import Document

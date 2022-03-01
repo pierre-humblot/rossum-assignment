@@ -1,7 +1,7 @@
 import dramatiq
 import PIL
 from pdf2image import convert_from_path
-from pdf2image.exceptions import PDFInfoNotInstalledError, PDFPageCountError, PDFSyntaxError
+from pdf2image.exceptions import PDFPageCountError
 from pika.exceptions import ConnectionWrongStateError
 
 from django.conf import settings
