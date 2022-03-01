@@ -1,0 +1,6 @@
+Django==3.1
+djangorestframework==3.12.4
+dramatiq[rabbitmq, watch]
+django_dramatiq
+psycopg2==2.8
+pdf2image==1.16.0

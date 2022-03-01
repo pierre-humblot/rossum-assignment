@@ -1,0 +1,66 @@
+# Run `docker-compose build` to build an image for api and workers containers.
+# Run `docker-compose up` to run all containers.
+
+version: "3.4"
+
+
+services:
+
+  db:
+    image: postgres
+    volumes:
+       - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  api:
+    image: pdf-api
+    build:
+      context: .
+      dockerfile: api.Dockerfile
+    command: >
+      bash -c "python manage.py makemigrations && python manage.py migrate
+      && python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - 8000:8000
+    volumes:
+      - ./data:/data
+    restart: on-failure
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    depends_on:
+      - db
+
+  workers:
+    image: pdf-workers
+    build:
+      context: .
+      dockerfile: dramatiq.Dockerfile
+    command: >
+      bash -c "sleep 4
+      && python manage.py makemigrations && python manage.py migrate
+      && python manage.py rundramatiq"
+    restart: on-failure
+    volumes:
+      - ./data:/data
+    depends_on:
+      - rabbitmq
+      - db
+
+  rabbitmq:
+    image: rabbitmq:latest
+    build:
+      context: .
+      dockerfile: rabbit.Dockerfile
+    command: rabbitmq-server
+    expose:
+      - 5672
+    restart: on-failure
+
+
+volumes:
+  db-data:
