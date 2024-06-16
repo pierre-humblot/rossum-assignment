@@ -79,3 +79,9 @@ python manage.py test api.tests.tests --settings=api.tests.test_settings
 ```
 
 
+
+### Infrastructure model
+![Infrastructure main model](.infragenie/infrastructure_main_model.svg)
+- [api component model](.infragenie/api_component_model.svg)
+
+---
